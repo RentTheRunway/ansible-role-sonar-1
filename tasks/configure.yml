@@ -1,5 +1,5 @@
 ---
-- name: Configure SonarQube JDBC settings for MySQL.
+- name: Configure SonarQube JDBC settings for MySQL and Compute Engine.
   lineinfile:
     dest: "{{ sonar_directory }}/conf/sonar.properties"
     regexp: "{{ item.regexp }}"
@@ -14,3 +14,16 @@
       line: "sonar.jdbc.url=jdbc:mysql://{{ sonar_mysql_host }}:{{ sonar_mysql_port }}/{{ sonar_mysql_database }}?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance"
     - regexp: "^sonar.web.context"
       line: "sonar.web.context={{ sonar_web_context }}"
+    - regexp: "^sonar.ce.javaOpts"
+      line: "sonar.ce.javaOpts={{ sonar_compute_engine_memory_configs }}"
+
+- name: Configure MySQL memory for handling large packet sizes
+  lineinfile:
+    dest: "{{ mysql_config_file }}"
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  with_items:
+    - regexp: "^innodb_buffer_pool_size"
+      line: "innodb_buffer_pool_size = {{ mysql_innodb_buffer_pool_size }}"
+    - regexp: "^max_allowed_packet"
+      line: "max_allowed_packet = {{ mysql_max_allowed_packet }}"

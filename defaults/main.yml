@@ -23,6 +23,13 @@ sonar_mysql_allowed_hosts:
   - "::1"
   - "localhost"
 
+# Storefront has a ton of files to scan, so upping memory here
+sonar_compute_engine_memory_configs: "-Xmx1024m -Xms128m -XX:+HeapDumpOnOutOfMemoryError"
+
+mysql_config_file: /etc/my.cnf
+mysql_innodb_buffer_pool_size: 256M
+mysql_max_allowed_packet: 256M
+
 # Sonar run user and group.
 sonar_run_user: root
 sonar_run_group: root
