@@ -17,7 +17,7 @@
     - regexp: "^sonar.ce.javaOpts"
       line: "sonar.ce.javaOpts={{ sonar_compute_engine_memory_configs }}"
 
-- name: Configure MySQL memory for handling large packet sizes
+- name: Configure MySQL memory for handling large packet sizes.
   lineinfile:
     dest: "{{ mysql_config_file }}"
     regexp: "{{ item.regexp }}"
@@ -27,3 +27,11 @@
       line: "innodb_buffer_pool_size = {{ mysql_innodb_buffer_pool_size }}"
     - regexp: "^max_allowed_packet"
       line: "max_allowed_packet = {{ mysql_max_allowed_packet }}"
+
+- name: Install SonarQube Dependency Check plugin.
+  get_url:
+    url: https://github.com/SonarSecurityCommunity/dependency-check-sonar-plugin/releases/download/1.2.4/sonar-dependency-check-plugin-1.2.4.jar
+    dest: "{{ sonar_directory }}/extensions/plugins"
+    owner: sonar,
+    group: sonar,
+    mode: 0644
