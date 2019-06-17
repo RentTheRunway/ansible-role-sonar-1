@@ -23,7 +23,7 @@
     regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
   with_items:
-    - regexp: "^innodb_buffer_pool_size"
-      line: "innodb_buffer_pool_size = {{ mysql_innodb_buffer_pool_size }}"
+    # - regexp: "^innodb_buffer_pool_size"
+    #   line: "innodb_buffer_pool_size = {{ mysql_innodb_buffer_pool_size }}"
     - regexp: "^max_allowed_packet"
       line: "max_allowed_packet = {{ mysql_max_allowed_packet }}"
