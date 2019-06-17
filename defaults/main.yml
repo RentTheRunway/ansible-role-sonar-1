@@ -27,7 +27,7 @@ sonar_mysql_allowed_hosts:
 sonar_compute_engine_memory_configs: "-Xmx1024m -Xms128m -XX:+HeapDumpOnOutOfMemoryError"
 
 mysql_config_file: /etc/my.cnf
-# mysql_innodb_buffer_pool_size: 256M
+mysql_innodb_buffer_pool_size: 2048M
 mysql_max_allowed_packet: 256M
 
 # Sonar run user and group.
