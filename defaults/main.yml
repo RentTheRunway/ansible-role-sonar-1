@@ -33,3 +33,5 @@ mysql_max_allowed_packet: 256M
 # Sonar run user and group.
 sonar_run_user: root
 sonar_run_group: root
+
+sonar_plugin_urls: []
