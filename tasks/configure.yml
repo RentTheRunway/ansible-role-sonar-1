@@ -14,8 +14,12 @@
       line: "sonar.jdbc.url=jdbc:mysql://{{ sonar_mysql_host }}:{{ sonar_mysql_port }}/{{ sonar_mysql_database }}?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance"
     - regexp: "^sonar.web.context"
       line: "sonar.web.context={{ sonar_web_context }}"
+    - regexp: "^(#?)sonar.web.javaOpts=(.*)"
+      line: "sonar.web.javaOpts={{ sonar_web_memory_configs }}"
     - regexp: "^sonar.ce.javaOpts"
       line: "sonar.ce.javaOpts={{ sonar_compute_engine_memory_configs }}"
+    - regexp: "^(#?)sonar.search.javaAdditionalOpts=(.*)"
+      line: "sonar.search.javaAdditionalOpts=-Dbootstrap.system_call_filter=false"
 
 - name: Configure MySQL memory for handling large packet sizes.
   replace:
